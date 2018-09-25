@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Campus.BllInterface\Campus.BllInterface.csproj" />
+    <ProjectReference Include="..\Campus.DalInterface\Campus.DalInterface.csproj" />
+    <ProjectReference Include="..\Campus.Utility\Campus.Utility.csproj" />
+  </ItemGroup>
+
 </Project>
