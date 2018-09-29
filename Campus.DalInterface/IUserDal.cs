@@ -7,6 +7,8 @@ namespace Campus.DalInterface
 {
     public interface IUserDal
     {
-         bool InsertUser(User user);
+        bool InsertUser(User user);
+        int GetRoleIdFormName(string name);
+        bool ValidLogin(User loginUser);
     }
 }

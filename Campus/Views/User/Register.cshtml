@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>注册</h2>
+<div>
+    <form onsubmit="return false">
+        <table>
+            <tr><td>用户名：</td><td><input type="text" id="userName" /></td></tr>
+            <tr><td>密码：</td><td><input type="password" id="password" /></td></tr>
+            <tr><td>是否为老师？</td><td><input type="checkbox" id="isTeacher" /></td></tr>
+            <tr><td><input type="submit" id="subBtn" value="提交" /></td><td><input type="reset" value="重置" /></td></tr>
+        </table>
+    </form>
+</div>
+@section Scripts{
+    <script src="~/js/Register.js"></script>
+
+}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+            </div>
+            <div class="modal-body">恭喜您注册成功！请点击登录界面进行登录！</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <a href="/User/Login" class="btn btn-primary">登录</a>
+            </div>
+        </div>
+    </div>
+</div>

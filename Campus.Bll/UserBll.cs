@@ -18,10 +18,29 @@ namespace Campus.Bll
             _userDal = userDal;
         }
 
-        public bool InsertUser(User user)
+        public bool InsertUser(User user, bool isTeacher)
         {
             user.Password = MD5Hash.Create(user.Password);
+            if (isTeacher)
+            {
+                user.RoleId = _userDal.GetRoleIdFormName("老师");
+            }
+            else
+            {
+                user.RoleId = _userDal.GetRoleIdFormName("学生");
+            }
             return _userDal.InsertUser(user);
+        }
+
+        public int GetRoleIdFormName(string name)
+        {
+            return _userDal.GetRoleIdFormName(name);
+        }
+
+        public bool ValidLogin(User loginUser)
+        {
+            loginUser.Password = MD5Hash.Create(loginUser.Password);
+            return _userDal.ValidLogin(loginUser);
         }
     }
 }

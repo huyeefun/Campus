@@ -6,6 +6,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
+    <PackageReference Include="UEditorNetCore" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Campus.BllInterface\Campus.BllInterface.csproj" />
+    <ProjectReference Include="..\Campus.Bll\Campus.Bll.csproj" />
+    <ProjectReference Include="..\Campus.Dal\Campus.Dal.csproj" />
+    <ProjectReference Include="..\Campus.Domain\Campus.Domain.csproj" />
   </ItemGroup>
 
 </Project>

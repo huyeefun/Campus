@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>登录界面</h2>
+<form action="/User/Login" method="post">
+    <table>
+        <tr><td>用户名：</td><td><input type="text" id="userName" name="userName" /></td></tr>
+        <tr><td>密码</td><td><input type="password" id="password" name="password"/></td></tr>
+        <tr><td><input type="submit" value="登录"/><input type="reset"value="重置"/></tr>
+    </table>
+</form>
+
