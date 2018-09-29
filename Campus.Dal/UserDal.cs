@@ -50,5 +50,15 @@ namespace Campus.Dal
         {
             return _campusDbContext.Users.Any(x => x.UserName == loginUser.UserName && x.Password == loginUser.Password);
         }
+
+        public int GetRoleIdFormUName(string userName)
+        {
+            return _campusDbContext.Users.Where(x => x.UserName == userName).Select(x => x.RoleId).FirstOrDefault();
+        }
+
+        public int GetIdByUName(string userName)
+        {
+            return _campusDbContext.Users.Where(x => x.UserName == userName).Select(x => x.Id).FirstOrDefault();
+        }
     }
 }

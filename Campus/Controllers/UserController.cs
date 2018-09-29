@@ -69,9 +69,12 @@ namespace Campus.Controllers
             bool result = _userBll.ValidLogin(loginUser);
             if(result)
             {
+                loginUser.RoleId = _userBll.GetRoleIdFormUName(loginUser.UserName);
                 var claim = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name,loginModel.UserName)
+                    new Claim(ClaimTypes.Name,loginModel.UserName),
+                    new Claim(ClaimTypes.Role,loginUser.RoleId.ToString()),
+                  
                 };
                 var claimIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
@@ -79,7 +82,7 @@ namespace Campus.Controllers
             }
             else
             {
-                return View("../User/Login");
+                return Unauthorized();
             }
         }
     }

@@ -10,5 +10,7 @@ namespace Campus.DalInterface
         bool InsertUser(User user);
         int GetRoleIdFormName(string name);
         bool ValidLogin(User loginUser);
+        int GetRoleIdFormUName(string userName);
+        int GetIdByUName(string userName);
     }
 }

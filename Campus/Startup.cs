@@ -42,9 +42,14 @@ namespace Campus
             services.AddTransient<IUserDal, UserDal>();
             services.AddTransient<IRoleBll, RoleBll>();
             services.AddTransient<IRoleDal, RoleDal>();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option=>{
-                option.LoginPath = "/User/login";
-            });
+            services.AddTransient<IHomeworkBll, HomeworkBll>();
+            services.AddTransient<IHomeworkDal, HomeworkDal>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.LoginPath = "/User/login";
+                    option.AccessDeniedPath = "/Homework/ErrorHints";
+                });
             services.AddDbContext<CampusDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Campus"));
@@ -67,7 +72,8 @@ namespace Campus
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy(new CookiePolicyOptions {
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
                 HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always
             });
             app.UseAuthentication();

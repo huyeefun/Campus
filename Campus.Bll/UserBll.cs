@@ -42,5 +42,15 @@ namespace Campus.Bll
             loginUser.Password = MD5Hash.Create(loginUser.Password);
             return _userDal.ValidLogin(loginUser);
         }
+
+        public int GetRoleIdFormUName(string userName)
+        {
+           return _userDal.GetRoleIdFormUName(userName);
+        }
+
+        public int GetIdByUName(string userName)
+        {
+            return _userDal.GetIdByUName(userName);
+        }
     }
 }

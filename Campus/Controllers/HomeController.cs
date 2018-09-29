@@ -6,14 +6,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Campus.Models;
 using Microsoft.AspNetCore.Authorization;
+using Campus.BllInterface;
+using Campus.Domain;
 
 namespace Campus.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
+        private readonly IHomeworkBll _homeworkBll;
+
+        public HomeController(IHomeworkBll homeworkBll)
+        {
+            _homeworkBll = homeworkBll;
+        }
+
         public IActionResult Index()
         {
+            var pageIndex = 1;
+            var pageSize = 10;
+            var list = _homeworkBll.GetAllHomeworks(pageIndex,pageSize);
+            ViewData["List"] = list;
             return View();
         }
 

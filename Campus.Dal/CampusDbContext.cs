@@ -14,6 +14,7 @@ namespace Campus.Dal
         }
         public DbSet<User> Users { set; get; }
         public DbSet<Role> Roles { set; get; }
+        public DbSet<Homework> Homeworks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -31,6 +32,13 @@ namespace Campus.Dal
                 entity.ToTable("Role");
                 entity.HasAlternateKey(x => x.Name);
                 entity.Property(x => x.Name).HasMaxLength(50).IsRequired();
+            });
+            modelBuilder.Entity<Homework>(entity =>
+            {
+                entity.ToTable("Homework");
+                entity.Property(x => x.Title).IsRequired().HasMaxLength(100);
+                entity.Property(x => x.Content).IsRequired().HasMaxLength(500000);
+                entity.HasOne(x => x.User).WithMany(x =>x.homeworks).HasForeignKey(x => x.AuthorId).HasConstraintName("ForeignKey_User_Homework");
             });
         }
     }
