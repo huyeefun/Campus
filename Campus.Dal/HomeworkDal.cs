@@ -20,7 +20,7 @@ namespace Campus.Dal
         public PagedList<Homework> GetAllHomeworks(int pageIndex, int pageSize)
         {
 
-            var list = _campusDbContext.Homeworks.Include(x => x.User.UserName)
+            var list = _campusDbContext.Homeworks.Include(x => x.User)
                 .OrderByDescending(x => x.ReleaseTime)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)

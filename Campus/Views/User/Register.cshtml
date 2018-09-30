@@ -14,20 +14,7 @@
         </table>
     </form>
 </div>
-<div>
-    @{
-        if (ViewData["error"] != null)
-        {
-            var modelState = ViewData["error"] as ModelStateDictionary;
-            foreach (var value in modelState.Values)
-            {
-                foreach (var error in value.Errors)
-                {
-                    <p>@error.ErrorMessage</p>
-                }
-            }
-        }
-    }
+<div id="errordiv" style="white-space: pre-line">
 </div>
 @section Scripts{
     <script src="~/js/Register.js"></script>

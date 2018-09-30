@@ -52,7 +52,7 @@ namespace Campus
                 });
             services.AddDbContext<CampusDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("Campus"));
+                options.UseSqlServer(Configuration.GetConnectionString("Campus"),x => x.UseRowNumberForPaging());
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

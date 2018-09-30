@@ -15,19 +15,19 @@ namespace Campus.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeworkBll _homeworkBll;
+        private int _pageSize = 2;
 
         public HomeController(IHomeworkBll homeworkBll)
         {
             _homeworkBll = homeworkBll;
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromQuery]int pageIndex = 1)
         {
-            var pageIndex = 1;
-            var pageSize = 10;
-            var list = _homeworkBll.GetAllHomeworks(pageIndex,pageSize);
-            ViewData["List"] = list;
-            return View();
+            var pList = _homeworkBll.GetAllHomeworks(pageIndex, _pageSize);
+            pList.PageIndex = pageIndex;
+            pList.PageSize = _pageSize;
+            return View(pList);
         }
 
         public IActionResult About()

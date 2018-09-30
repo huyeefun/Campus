@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Campus.Bll;
 using Campus.BllInterface;
@@ -14,6 +15,7 @@ using Campus.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Campus.Controllers
 {
@@ -50,8 +52,16 @@ namespace Campus.Controllers
             }
             else
             {
-                ViewData["error"] = ModelState;
-                return View("Register");
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("提醒：");
+                foreach (var item in ModelState.Values)
+                {
+                    foreach (var error in item.Errors)
+                    {
+                        sb.AppendLine(error.ErrorMessage);
+                    }
+                }
+                return StatusCode(400, sb.ToString());
             }
         }
 
@@ -67,22 +77,23 @@ namespace Campus.Controllers
             loginUser.UserName = loginModel.UserName;
             loginUser.Password = loginModel.Password;
             bool result = _userBll.ValidLogin(loginUser);
-            if(result)
+            if (result)
             {
                 loginUser.RoleId = _userBll.GetRoleIdFormUName(loginUser.UserName);
                 var claim = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,loginModel.UserName),
                     new Claim(ClaimTypes.Role,loginUser.RoleId.ToString()),
-                  
+
                 };
                 var claimIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
-                return View("../Home/Index"); 
+                return View("../Home/Index");
             }
             else
             {
-                return Unauthorized();
+                ViewData["error"] = "登录失败！用户名或者密码错误！";
+                return View();
             }
         }
     }

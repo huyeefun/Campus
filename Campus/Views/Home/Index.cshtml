@@ -1,4 +1,39 @@
-﻿@{
+﻿@using Campus.Domain;
+@model Campus.Domain.PagedList<Homework>
+@{
     ViewData["Title"] = "主页";
 }
 
+<style>
+    li.active {
+        background-color: darkslategrey;
+    }
+
+    li.page-item {
+        display: inline;
+        border: 1px solid cadetblue;
+        margin: 0 5px;
+        padding: 2px;
+    }
+</style>
+
+<div>
+    @foreach (var item in Model.Source)
+    {
+        <p>@item.Title</p>
+    }
+</div>
+<div>
+    @{
+        //var pageCount = Math.Ceiling((double)Model.Count / Model.PageSize);
+
+        <ul>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li class="@(Model.PageIndex == i ? "active" : "") page-item">
+                    <a href="./?pageIndex=@i">@i</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
