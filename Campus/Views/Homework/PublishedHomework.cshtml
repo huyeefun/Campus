@@ -1,11 +1,17 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "发布作业";
 }
 <h2>发布作业</h2>
+<div style="white-space: pre-line">
+    @{ if (ViewData["error"] != null)
+        {
+            <div>@ViewData["error"]</div>
+        }
+    }
+</div>
 <form method="post" action="../HomeWork/PublishedHomework">
 <label>标题：</label><input type="text" name="title" width="500"/>
-<textarea id="mytextarea" name="content">Hello, World!</textarea>
+<textarea id="mytextarea" name="content"></textarea>
 <input type="submit" value="提交"/>
 </form>
 @section Scripts{

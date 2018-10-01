@@ -15,7 +15,7 @@ namespace Campus.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeworkBll _homeworkBll;
-        private int _pageSize = 2;
+        private int _pageSize = 10;
 
         public HomeController(IHomeworkBll homeworkBll)
         {

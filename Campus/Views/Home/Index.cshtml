@@ -1,4 +1,5 @@
 ﻿@using Campus.Domain;
+
 @model Campus.Domain.PagedList<Homework>
 @{
     ViewData["Title"] = "主页";
@@ -18,10 +19,17 @@
 </style>
 
 <div>
-    @foreach (var item in Model.Source)
-    {
-        <p>@item.Title</p>
-    }
+    @{var role = User.Claims.FirstOrDefault(x => x.Type == System.Security.Claims.ClaimTypes.Role);}
+    <table>
+        <tr><th>标题</th><th>创建人</th></tr>
+        @foreach (var item in Model.Source)
+        {
+            if (item.Deleted == false)
+            {
+           <tr><td><a href='@(role.Value == "2" ? "/Homework/ShowDetailForTeahcher" : "/Homework/ShowDetailForStudent")?HomeworkId=@item.Id'>@item.Title</a></td><td>@item.User.UserName</td></tr>
+            }
+        }
+    </table>
 </div>
 <div>
     @{

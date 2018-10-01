@@ -88,7 +88,7 @@ namespace Campus.Controllers
                 };
                 var claimIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
-                return View("../Home/Index");
+                return Redirect("/Home/Index");
             }
             else
             {

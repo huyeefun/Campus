@@ -11,6 +11,7 @@ namespace Campus.Domain
         public string Password { get; set; }
         public int RoleId { get; set; }
         public Role Role { get; set; }
-        public ICollection<Homework> homeworks { get; set; }
+        public ICollection<Homework> Homeworks { get; set; }
+        public ICollection<Answer> Answers { get; set; }
     }
 }

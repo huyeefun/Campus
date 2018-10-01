@@ -1,0 +1,21 @@
+﻿@model Campus.Domain.Homework
+@{
+    ViewData["Title"] = "ShowDetailForTeahcher";
+}
+
+<h2>这里是老师的界面</h2>
+<div id="displayDiv">
+    <h3 id="displayTitle">@Model.Title</h3>
+    <div id="displayContent">@Html.Raw(Model.Content)</div>
+    <a href="/Homework/Editor?homeworkId=@Model.Id"  class="update">更改</a>&nbsp;
+    <a href="/Homework/Delete?homeworkId=@Model.Id">删除</a>&nbsp;
+</div>
+<hr />
+@{
+    foreach (var answer in Model.Answers)
+    {
+        <div>@Html.Raw(answer.Content)</div>
+        <div>创建人：@answer.User.UserName</div>
+        <hr />
+    }
+}

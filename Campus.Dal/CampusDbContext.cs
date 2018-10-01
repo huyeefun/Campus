@@ -15,6 +15,7 @@ namespace Campus.Dal
         public DbSet<User> Users { set; get; }
         public DbSet<Role> Roles { set; get; }
         public DbSet<Homework> Homeworks { get; set; }
+        public DbSet<Answer> Answers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -38,7 +39,16 @@ namespace Campus.Dal
                 entity.ToTable("Homework");
                 entity.Property(x => x.Title).IsRequired().HasMaxLength(100);
                 entity.Property(x => x.Content).IsRequired().HasMaxLength(500000);
-                entity.HasOne(x => x.User).WithMany(x =>x.homeworks).HasForeignKey(x => x.AuthorId).HasConstraintName("ForeignKey_User_Homework");
+                entity.Property(x => x.Deleted).HasDefaultValue(false);
+                entity.HasOne(x => x.User).WithMany(x =>x.Homeworks).HasForeignKey(x => x.AuthorId).HasConstraintName("ForeignKey_User_Homework");
+            });
+            modelBuilder.Entity<Answer>(entity =>
+            {
+                entity.ToTable("Answer");
+                entity.Property(x => x.Content).IsRequired().HasMaxLength(100);
+               
+                entity.HasOne(x => x.User).WithMany(x => x.Answers).HasForeignKey(x => x.AuthorId).HasConstraintName("ForeignKey_User_Answer");
+                entity.HasOne(x => x.Homework).WithMany(x => x.Answers).HasForeignKey(x => x.HomeworkId).HasConstraintName("ForeignKey_Homework_Answer");
             });
         }
     }

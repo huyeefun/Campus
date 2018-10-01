@@ -9,5 +9,8 @@ namespace Campus.DalInterface
     {
         bool Insert(Homework homework);
         PagedList<Homework> GetAllHomeworks(int pageIndex,int pageSize);
+        Homework GetDetail(int id);
+        bool Update(Homework homework);
+        bool Delete(Homework homework);
     }
 }

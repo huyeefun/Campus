@@ -44,6 +44,8 @@ namespace Campus
             services.AddTransient<IRoleDal, RoleDal>();
             services.AddTransient<IHomeworkBll, HomeworkBll>();
             services.AddTransient<IHomeworkDal, HomeworkDal>();
+            services.AddTransient<IAnswerBll, AnswerBll>();
+            services.AddTransient<IAnswerDal, AnswerDal>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>
                 {
