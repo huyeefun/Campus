@@ -11,6 +11,7 @@ namespace Campus.Domain
         public string Content { get; set; }
         public int AuthorId { get; set; }
         public DateTime ReleaseTime { get; set; }
+        public bool Deleted { get; set; }
         public User User { get; set; }
         public Homework Homework { get; set; }
     }

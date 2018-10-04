@@ -28,7 +28,7 @@ namespace Campus.Dal
         {
 
             var list = _campusDbContext.Homeworks.Include(x => x.User)
-                .OrderByDescending(x => x.ReleaseTime)
+                .OrderByDescending(x => x.ReleaseTime).Where(x=>x.Deleted==false)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();

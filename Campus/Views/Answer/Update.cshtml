@@ -1,28 +1,26 @@
-﻿@model Campus.Domain.Homework
+﻿@model Campus.Domain.Answer
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "Editor";
 }
 
-<h2>Update</h2>
+<h2>修改回答</h2>
 <div id="EditorDiv">
-        标题：<input type="text" id="mytitle" name="title" value="@Model.Title"/>
-           <textarea id="mytextarea" name="content">@Html.Raw(Model.Content)</textarea>
-        <button id="btnConfirm">确认修改</button>
+    <textarea id="mytextarea" name="content">@Html.Raw(Model.Content)</textarea>
+    <button id="btnConfirm">确认修改</button>
 </div>
 @section Scripts{
     <script src="~/lib/tinymce/tinymce.min.js"></script>
     <script>
         $(function () {
             InitTinymce();
-           //$("mytextarea").html('@Html.Raw(Model.Content)');
             $("#btnConfirm").click(function () {
                 var content = tinymce.activeEditor.getContent();
-                var title = $("#mytitle").val();
                 var Id =@Model.Id;
                 var AuthorId =@Model.AuthorId;
-                $.post("/Homework/Update", { Id: Id, content: content, title: title, authorId: AuthorId }, function (data) {
+                var homeworkId =@Model.HomeworkId;
+                $.post("/Answer/Update", { Id: Id, content: content, authorId: AuthorId, homeworkId: homeworkId }, function (data) {
                     if (data) {
-                        window.location.href = "/homework/ShowDetailForTeahcher?homeworkid=@Model.Id";
+                        window.location.href = "/Homework/ShowDetailForStudent?homeworkid=@Model.HomeworkId";
                     }
                     else {
                         alert("更新发生错误！请您稍后重试！");
@@ -43,4 +41,4 @@
                 toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
             }); }
     </script>
-            }
+}

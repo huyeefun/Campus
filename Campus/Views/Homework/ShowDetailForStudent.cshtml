@@ -1,7 +1,29 @@
-﻿
+﻿@model Campus.Domain.Homework
 @{
     ViewData["Title"] = "ShowDetailForStudent";
 }
 
 <h2>这里是学生的界面</h2>
-
+<div id="displayDiv">
+    <h3 id="displayTitle">@Model.Title</h3>
+    <div id="displayContent">@Html.Raw(Model.Content)</div>
+    <a href="/Answer/Insert?homeworkId=@Model.Id">添加回答</a>&nbsp
+</div>
+<hr />
+@{
+    foreach (var answer in Model.Answers)
+    {
+        if (answer.Deleted == false)
+        {
+            <div>@Html.Raw(answer.Content)</div>
+            <div>创建人：@answer.User.UserName</div>
+            var a = User.Claims.FirstOrDefault(x => x.Type == "UserId");
+            if (a.Value == answer.AuthorId.ToString())
+            {
+                <a href="/Answer/Update?answerId=@answer.Id">修改</a>
+                <a href="/Answer/Delete?answerId=@answer.Id">删除</a>
+            }
+            <hr />
+        }
+    }
+}

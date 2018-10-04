@@ -46,7 +46,7 @@ namespace Campus.Dal
             {
                 entity.ToTable("Answer");
                 entity.Property(x => x.Content).IsRequired().HasMaxLength(100);
-               
+                entity.Property(x => x.Deleted).HasDefaultValue(false);
                 entity.HasOne(x => x.User).WithMany(x => x.Answers).HasForeignKey(x => x.AuthorId).HasConstraintName("ForeignKey_User_Answer");
                 entity.HasOne(x => x.Homework).WithMany(x => x.Answers).HasForeignKey(x => x.HomeworkId).HasConstraintName("ForeignKey_Homework_Answer");
             });

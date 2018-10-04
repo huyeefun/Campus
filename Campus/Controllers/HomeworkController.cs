@@ -41,7 +41,7 @@ namespace Campus.Controllers
                 homework.ReleaseTime = DateTime.Now;
                 homework.AuthorId = _userBll.GetIdByUName(User.Identity.Name);
                 bool isOk = _homeworkBll.Insert(homework);
-                return View();
+                return Redirect("/Home/Index");
             }
             else
             {
@@ -73,14 +73,15 @@ namespace Campus.Controllers
         public IActionResult ShowDetailForStudent([FromQuery]int homeworkId)
         {
             Homework homework = _homeworkBll.GetDetail(homeworkId);
-            return View();
+            return View(homework);
         }
-        public IActionResult Editor([FromQuery] int homeworkId)
+        [HttpGet]
+        public IActionResult Update([FromQuery] int homeworkId)
         {
             Homework homework = _homeworkBll.GetDetail(homeworkId);
             return View(homework);
         }
-
+        [HttpPost]
         public IActionResult Update(Homework homework)
         {
             bool ok = _homeworkBll.Update(homework);
@@ -92,7 +93,14 @@ namespace Campus.Controllers
             Homework homework = _homeworkBll.GetDetail(homeworkId);
             homework.Deleted = true;
             bool ok = _homeworkBll.Delete(homework);
-            return View("../Home/Index");
+            if (ok)
+            {
+                return Redirect("/Home/Index");
+            }
+            else
+            {
+                return Redirect("/Home/ErrorPage");
+            }
         }
     }
 }

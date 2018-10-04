@@ -6,6 +6,7 @@ using Campus.Bll;
 using Campus.BllInterface;
 using Campus.Dal;
 using Campus.DalInterface;
+using Campus.Filter;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,9 +55,12 @@ namespace Campus
                 });
             services.AddDbContext<CampusDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("Campus"),x => x.UseRowNumberForPaging());
+                options.UseSqlServer(Configuration.GetConnectionString("Campus"), x => x.UseRowNumberForPaging());
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new LogExceptionFilter());//如果通过声明依赖的方式，这里有所不同
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

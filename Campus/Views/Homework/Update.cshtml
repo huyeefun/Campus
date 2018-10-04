@@ -1,7 +1,45 @@
-﻿
+﻿@model Campus.Domain.Homework
 @{
     ViewData["Title"] = "Update";
 }
 
-<h2>Update</h2>
-
+<h2>修改问题</h2>
+<div id="EditorDiv">
+        标题：<input type="text" id="mytitle" name="title" value="@Model.Title" size="50"/>
+           <textarea id="mytextarea" name="content">@Html.Raw(Model.Content)</textarea>
+        <button id="btnConfirm">确认修改</button>
+</div>
+@section Scripts{
+    <script src="~/lib/tinymce/tinymce.min.js"></script>
+    <script>
+        $(function () {
+            InitTinymce();
+            $("#btnConfirm").click(function () {
+                var content = tinymce.activeEditor.getContent();
+                var title = $("#mytitle").val();
+                var Id =@Model.Id;
+                var AuthorId =@Model.AuthorId;
+                $.post("/Homework/Update", { Id: Id, content: content, title: title, authorId: AuthorId }, function (data) {
+                    if (data) {
+                        window.location.href = "/homework/ShowDetailForTeahcher?homeworkid=@Model.Id";
+                    }
+                    else {
+                        alert("更新发生错误！请您稍后重试！");
+                    }
+                });
+            });
+        });
+        function InitTinymce(){
+            tinymce.init({
+                selector: '#mytextarea',
+                images_upload_url: "/upload/create",
+                images_upload_credentials: true,
+                plugins: [
+                    'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                    'save table contextmenu directionality emoticons template paste textcolor'
+                ],
+                toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+            }); }
+    </script>
+            }

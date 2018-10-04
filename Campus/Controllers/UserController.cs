@@ -80,11 +80,12 @@ namespace Campus.Controllers
             if (result)
             {
                 loginUser.RoleId = _userBll.GetRoleIdFormUName(loginUser.UserName);
+                loginUser.Id = _userBll.GetIdByUName(loginUser.UserName);
                 var claim = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,loginModel.UserName),
                     new Claim(ClaimTypes.Role,loginUser.RoleId.ToString()),
-
+                    new Claim("UserId",loginUser.Id.ToString()),
                 };
                 var claimIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
