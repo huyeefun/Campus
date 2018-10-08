@@ -31,7 +31,6 @@ namespace Campus.Dal
                 var sqlEx = ex.InnerException as SqlException;
                 if (sqlEx != null)
                 {
-                    //违反了唯一键约束的 sql 异常代码
                     if (sqlEx.Number == 2627)
                     {
                         throw new ValidationException("用户名不能重复", sqlEx);
@@ -59,6 +58,11 @@ namespace Campus.Dal
         public int GetIdByUName(string userName)
         {
             return _campusDbContext.Users.Where(x => x.UserName == userName).Select(x => x.Id).FirstOrDefault();
+        }
+
+        public bool ExistUserName(string userName)
+        {
+            return _campusDbContext.Users.Any(x=>x.UserName==userName);
         }
     }
 }

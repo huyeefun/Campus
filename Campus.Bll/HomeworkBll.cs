@@ -28,13 +28,15 @@ namespace Campus.Bll
 
         public bool Insert(Homework homework)
         {
-           return _homeworkDal.Insert(homework);
+            return _homeworkDal.Insert(homework);
         }
+
         public bool Update(Homework homework)
         {
             homework.ReleaseTime = DateTime.Now;
             return _homeworkDal.Update(homework);
         }
+
         public bool Delete(Homework homework)
         {
             return _homeworkDal.Delete(homework);

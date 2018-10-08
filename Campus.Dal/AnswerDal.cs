@@ -18,13 +18,13 @@ namespace Campus.Dal
 
         public Answer GetDetail(int id)
         {
-           return _campusDbContext.Answers.Where(x => x.Id == id).FirstOrDefault();
+            return _campusDbContext.Answers.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public bool Insert(Answer answer)
         {
             _campusDbContext.Answers.Add(answer);
-            int rows= _campusDbContext.SaveChanges();
+            int rows = _campusDbContext.SaveChanges();
             return rows > 0;
         }
 

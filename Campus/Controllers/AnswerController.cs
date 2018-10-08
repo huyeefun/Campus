@@ -29,11 +29,11 @@ namespace Campus.Controllers
         public IActionResult Insert(Answer answer)
         {
             var UserId = User.Claims.FirstOrDefault(x => x.Type == "UserId");
-            answer.AuthorId =int.Parse(UserId.Value);
-            bool ok=_answerBll.Insert(answer);
+            answer.AuthorId = int.Parse(UserId.Value);
+            bool ok = _answerBll.Insert(answer);
             if (ok)
             {
-                return Redirect("/Homework/ShowDetailForStudent?homeworkId="+answer.HomeworkId);
+                return Redirect("/Homework/ShowDetailForStudent?homeworkId=" + answer.HomeworkId);
             }
             else
             {
@@ -44,14 +44,14 @@ namespace Campus.Controllers
         [HttpGet]
         public IActionResult Update([FromQuery] int answerId)
         {
-           Answer answer = _answerBll.GetDetail(answerId);
+            Answer answer = _answerBll.GetDetail(answerId);
             return View(answer);
         }
 
         [HttpPost]
         public IActionResult Update(Answer answer)
         {
-            bool ok= _answerBll.Update(answer);
+            bool ok = _answerBll.Update(answer);
             return Json(new { isSucceed = ok });
         }
 
@@ -59,9 +59,9 @@ namespace Campus.Controllers
         {
             Answer answer = _answerBll.GetDetail(answerId);
             bool ok = _answerBll.Delete(answerId);
-            if(ok)
+            if (ok)
             {
-                return Redirect("/Homework/ShowDetailForStudent?homeworkId="+answer.HomeworkId);
+                return Redirect("/Homework/ShowDetailForStudent?homeworkId=" + answer.HomeworkId);
             }
             else
             {

@@ -31,6 +31,7 @@ namespace Campus.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "2")]
         public IActionResult PublishedHomework(HomeworkInputModel inputContent)
         {
             if (ModelState.IsValid)
@@ -64,6 +65,7 @@ namespace Campus.Controllers
             return View();
         }
 
+        [Authorize(Roles = "2")]
         public IActionResult ShowDetailForTeahcher([FromQuery] int homeworkId)
         {
             Homework homework = _homeworkBll.GetDetail(homeworkId);
@@ -75,12 +77,14 @@ namespace Campus.Controllers
             Homework homework = _homeworkBll.GetDetail(homeworkId);
             return View(homework);
         }
+
         [HttpGet]
         public IActionResult Update([FromQuery] int homeworkId)
         {
             Homework homework = _homeworkBll.GetDetail(homeworkId);
             return View(homework);
         }
+
         [HttpPost]
         public IActionResult Update(Homework homework)
         {

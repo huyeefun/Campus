@@ -31,12 +31,12 @@ namespace Campus.Bll
         public bool Update(Answer answer)
         {
             answer.ReleaseTime = DateTime.Now;
-           return _answerDal.Update(answer);
+            return _answerDal.Update(answer);
         }
 
         public bool Delete(int answerId)
         {
-            Answer answer= _answerDal.GetDetail(answerId);
+            Answer answer = _answerDal.GetDetail(answerId);
             answer.Deleted = true;
             return _answerDal.Delete(answer);
         }

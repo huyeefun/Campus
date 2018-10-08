@@ -45,12 +45,17 @@ namespace Campus.Bll
 
         public int GetRoleIdFormUName(string userName)
         {
-           return _userDal.GetRoleIdFormUName(userName);
+            return _userDal.GetRoleIdFormUName(userName);
         }
 
         public int GetIdByUName(string userName)
         {
             return _userDal.GetIdByUName(userName);
+        }
+
+        public bool ExistUserName(string userName)
+        {
+            return _userDal.ExistUserName(userName);
         }
     }
 }

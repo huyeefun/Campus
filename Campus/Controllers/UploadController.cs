@@ -25,14 +25,11 @@ namespace Campus.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            //1. 读取图片
             var files = Request.Form.Files;
             var fileName = Guid.NewGuid().ToString();
             foreach (var file in files)
             {
                 fileName += file.FileName;
-                // 验证 是不是图片
-                //2. 保存到本地文件系统
                 var directory = $"{_environment.WebRootPath}{PATH}";
                 if (!Directory.Exists(directory))
                 {
@@ -43,7 +40,6 @@ namespace Campus.Controllers
                     file.CopyTo(fs);
                 }
             }
-            //3. 返回地址
             return Json(new { location = $"{PATH}{fileName}" });
         }
     }

@@ -28,18 +28,18 @@ namespace Campus.Dal
         {
 
             var list = _campusDbContext.Homeworks.Include(x => x.User)
-                .OrderByDescending(x => x.ReleaseTime).Where(x=>x.Deleted==false)
+                .OrderByDescending(x => x.ReleaseTime).Where(x => x.Deleted == false)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
-            var count = _campusDbContext.Homeworks.Count();
+            var count = _campusDbContext.Homeworks.Where(x => x.Deleted == false).Count();
             return new PagedList<Homework>(list, count);
         }
 
         public Homework GetDetail(int id)
         {
-            var homework=_campusDbContext.Homeworks.Where(x => x.Id == id).FirstOrDefault();
-            homework.Answers = _campusDbContext.Answers.Include(x=>x.User).Where(x => x.HomeworkId == id).ToList();
+            var homework = _campusDbContext.Homeworks.Where(x => x.Id == id).FirstOrDefault();
+            homework.Answers = _campusDbContext.Answers.Include(x => x.User).Where(x => x.HomeworkId == id).ToList();
             return homework;
         }
 
@@ -49,11 +49,12 @@ namespace Campus.Dal
             int rows = _campusDbContext.SaveChanges();
             return rows > 0;
         }
+
         public bool Update(Homework homework)
         {
             _campusDbContext.Homeworks.Update(homework);
             int rows = _campusDbContext.SaveChanges();
-            return rows>0;
+            return rows > 0;
         }
     }
 }

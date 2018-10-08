@@ -22,7 +22,6 @@ namespace Campus.Controllers
     public class UserController : Controller
     {
         private readonly IUserBll _userBll;
-
         public UserController(IUserBll userBll)
         {
             _userBll = userBll;
@@ -70,6 +69,7 @@ namespace Campus.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Login(LoginModel loginModel)
         {
@@ -96,6 +96,19 @@ namespace Campus.Controllers
                 ViewData["error"] = "登录失败！用户名或者密码错误！";
                 return View();
             }
+        }
+
+        public IActionResult SignOut()
+        {
+            HttpContext.SignOutAsync();
+            return Redirect("/Home/Index");
+        }
+
+        [HttpGet]
+        public IActionResult ExistUserName([FromQuery]string userName)
+        {
+            bool ok = _userBll.ExistUserName(userName);
+            return Json(new { result = ok });
         }
     }
 }

@@ -5,15 +5,14 @@
 
 <h2>修改问题</h2>
 <div id="EditorDiv">
-        标题：<input type="text" id="mytitle" name="title" value="@Model.Title" size="50"/>
-           <textarea id="mytextarea" name="content">@Html.Raw(Model.Content)</textarea>
-        <button id="btnConfirm">确认修改</button>
+    标题：<input type="text" id="mytitle" name="title" value="@Model.Title" size="50" />
+    <textarea id="mytextarea" name="content">@Html.Raw(Model.Content)</textarea>
+    <button id="btnConfirm">确认修改</button>
 </div>
 @section Scripts{
-    <script src="~/lib/tinymce/tinymce.min.js"></script>
+    <script src="~/js/InitTinymce.js"></script>
     <script>
         $(function () {
-            InitTinymce();
             $("#btnConfirm").click(function () {
                 var content = tinymce.activeEditor.getContent();
                 var title = $("#mytitle").val();
@@ -29,17 +28,5 @@
                 });
             });
         });
-        function InitTinymce(){
-            tinymce.init({
-                selector: '#mytextarea',
-                images_upload_url: "/upload/create",
-                images_upload_credentials: true,
-                plugins: [
-                    'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
-                    'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-                    'save table contextmenu directionality emoticons template paste textcolor'
-                ],
-                toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
-            }); }
     </script>
-            }
+}

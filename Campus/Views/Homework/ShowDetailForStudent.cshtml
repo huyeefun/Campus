@@ -16,7 +16,7 @@
         if (answer.Deleted == false)
         {
             <div>@Html.Raw(answer.Content)</div>
-            <div>创建人：@answer.User.UserName</div>
+            <div>创建人：@answer.User.UserName &nbsp;发布时间:@answer.ReleaseTime</div>
             var a = User.Claims.FirstOrDefault(x => x.Type == "UserId");
             if (a.Value == answer.AuthorId.ToString())
             {

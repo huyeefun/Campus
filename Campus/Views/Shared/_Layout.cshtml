@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -15,6 +17,17 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <style type="text/css">
+        .showArea {
+            float: right;
+            margin-top: -25px;
+            margin-right: 10px;
+            color: #9d9d9d;
+        }
+        a {
+            color: #9d9d9d;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -30,19 +43,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">主页</a></li>
                     <li><a asp-area="" asp-controller="Homework" asp-action="PublishedHomework">发布作业</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
             </div>
         </div>
+        @if (User.Identity.Name != null)
+        {
+            <div class="showArea">
+                <span id="username">@User.Identity.Name</span> <a href="/User/SignOut">登出</a>
+            </div>
+        }
+        else
+        {
+            <div class="showArea">
+            <a href="/User/Register">注册</a>
+            <a href="/User/Login">登录</a>
+            </div>
+        }
     </nav>
-
-    <div>
-        <a href="\User\Register">注册</a>
-        <a href="\User\Login">登录</a>
-    </div>
-
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">

@@ -59,7 +59,7 @@ namespace Campus
             });
             services.AddMvc(options =>
             {
-                options.Filters.Add(new LogExceptionFilter());//如果通过声明依赖的方式，这里有所不同
+                options.Filters.Add(new LogExceptionFilter());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

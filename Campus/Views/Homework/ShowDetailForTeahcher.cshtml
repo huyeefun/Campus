@@ -17,7 +17,7 @@
         if(answer.Deleted==false)
         { 
         <div>@Html.Raw(answer.Content)</div>
-        <div>创建人：@answer.User.UserName</div>
+        <div>创建人：@answer.User.UserName  &nbsp;发布时间:@answer.ReleaseTime</div>
         <hr />
         }
     }

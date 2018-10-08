@@ -13,5 +13,6 @@ namespace Campus.BllInterface
         bool ValidLogin(User loginUser);
         int GetRoleIdFormUName(string userName);
         int GetIdByUName(string userName);
+        bool ExistUserName(string userName);
     }
 }

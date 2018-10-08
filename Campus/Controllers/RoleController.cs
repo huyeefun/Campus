@@ -15,10 +15,5 @@ namespace Campus.Controllers
         {
             _roleBll = roleBll;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }
