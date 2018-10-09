@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campus.Domain", "Campus.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campus.Utility", "Campus.Utility\Campus.Utility.csproj", "{CD82EADF-5D44-4F2F-8324-0F9C4E632984}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlScript", "SqlScript", "{C5E197BD-42C3-453C-AE68-962D00FF9100}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestSqlScript", "TestSqlScript", "{E33DC1E2-C16D-47CC-964E-E55C9E9B3935}"
 	ProjectSection(SolutionItems) = preProject
-		I:\sqlscript.sql = I:\sqlscript.sql
+		Sqlscript.sql = Sqlscript.sql
 	EndProjectSection
 EndProject
 Global
