@@ -36,31 +36,15 @@ namespace Campus.Controllers
         [HttpPost]
         public IActionResult Register(RegisterInputModel registerInput)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    bool ok = _userBll.InsertUser(new User { UserName = registerInput.UserName, Password = registerInput.Password }, registerInput.IsTeacher);
-                    JsonResult jsonResult = Json(new { isSucceed = ok });
-                    return jsonResult;
-                }
-                catch (ValidationException ex)
-                {
-                    return StatusCode((int)HttpStatusCode.BadRequest, ex.Message);
-                }
+                bool ok = _userBll.InsertUser(new User { UserName = registerInput.UserName, Password = registerInput.Password }, registerInput.IsTeacher);
+                JsonResult jsonResult = Json(new { isSucceed = ok });
+                return jsonResult;
             }
-            else
+            catch (ValidationException ex)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("提醒：");
-                foreach (var item in ModelState.Values)
-                {
-                    foreach (var error in item.Errors)
-                    {
-                        sb.AppendLine(error.ErrorMessage);
-                    }
-                }
-                return StatusCode(400, sb.ToString());
+                return StatusCode((int)HttpStatusCode.BadRequest, ex.Message);
             }
         }
 

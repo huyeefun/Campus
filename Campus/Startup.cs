@@ -60,6 +60,7 @@ namespace Campus
             services.AddMvc(options =>
             {
                 options.Filters.Add(new LogExceptionFilter());
+                options.Filters.Add(new ModelValidationFilter());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
