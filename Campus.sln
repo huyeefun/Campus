@@ -13,9 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campus.Bll", "Campus.Bll\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campus.BllInterface", "Campus.BllInterface\Campus.BllInterface.csproj", "{143C2746-99FC-4736-84F6-4017F41BDF96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campus.Domain", "Campus.Domain\Campus.Domain.csproj", "{E0F30490-CD93-43EA-A02A-6DE380858760}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campus.Domain", "Campus.Domain\Campus.Domain.csproj", "{E0F30490-CD93-43EA-A02A-6DE380858760}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campus.Utility", "Campus.Utility\Campus.Utility.csproj", "{CD82EADF-5D44-4F2F-8324-0F9C4E632984}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campus.Utility", "Campus.Utility\Campus.Utility.csproj", "{CD82EADF-5D44-4F2F-8324-0F9C4E632984}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlScript", "SqlScript", "{C5E197BD-42C3-453C-AE68-962D00FF9100}"
+	ProjectSection(SolutionItems) = preProject
+		I:\sqlscript.sql = I:\sqlscript.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
