@@ -28,8 +28,8 @@ namespace Campus.Controllers
         [HttpPost]
         public IActionResult Insert(Answer answer)
         {
-            var UserId = User.Claims.FirstOrDefault(x => x.Type == "UserId");
-            answer.AuthorId = int.Parse(UserId.Value);
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "UserId");
+            answer.AuthorId = int.Parse(userId.Value);
             bool ok = _answerBll.Insert(answer);
             if (ok)
             {

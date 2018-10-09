@@ -1,6 +1,6 @@
 ﻿@model Campus.Domain.Homework
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "修改作业";
 }
 
 <h2>修改问题</h2>
@@ -16,9 +16,9 @@
             $("#btnConfirm").click(function () {
                 var content = tinymce.activeEditor.getContent();
                 var title = $("#mytitle").val();
-                var Id =@Model.Id;
-                var AuthorId =@Model.AuthorId;
-                $.post("/Homework/Update", { Id: Id, content: content, title: title, authorId: AuthorId }, function (data) {
+                var id =@Model.Id;
+                var authorId =@Model.AuthorId;
+                $.post("/Homework/Update", { id: id, content: content, title: title, authorId: authorId }, function (data) {
                     if (data) {
                         window.location.href = "/homework/ShowDetailForTeahcher?homeworkid=@Model.Id";
                     }

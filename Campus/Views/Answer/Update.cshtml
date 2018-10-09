@@ -1,6 +1,6 @@
 ﻿@model Campus.Domain.Answer
 @{
-    ViewData["Title"] = "Editor";
+    ViewData["Title"] = "修改回答";
 }
 <h2>修改回答</h2>
 <div id="EditorDiv">
@@ -13,10 +13,10 @@
         $(function () {
             $("#btnConfirm").click(function () {
                 var content = tinymce.activeEditor.getContent();
-                var Id =@Model.Id;
-                var AuthorId =@Model.AuthorId;
-                var homeworkId =@Model.HomeworkId;
-                $.post("/Answer/Update", { Id: Id, content: content, authorId: AuthorId, homeworkId: homeworkId }, function (data) {
+                var id = @Model.Id;
+                var authorId = @Model.AuthorId;
+                var homeworkId = @Model.HomeworkId;
+                $.post("/Answer/Update", { id: id, content: content, authorId: authorId, homeworkId: homeworkId }, function (data) {
                     if (data) {
                         window.location.href = "/Homework/ShowDetailForStudent?homeworkid=@Model.HomeworkId";
                     }

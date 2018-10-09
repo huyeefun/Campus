@@ -41,8 +41,6 @@ namespace Campus
             });
             services.AddTransient<IUserBll, UserBll>();
             services.AddTransient<IUserDal, UserDal>();
-            services.AddTransient<IRoleBll, RoleBll>();
-            services.AddTransient<IRoleDal, RoleDal>();
             services.AddTransient<IHomeworkBll, HomeworkBll>();
             services.AddTransient<IHomeworkDal, HomeworkDal>();
             services.AddTransient<IAnswerBll, AnswerBll>();

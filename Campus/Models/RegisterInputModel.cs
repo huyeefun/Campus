@@ -12,6 +12,7 @@ namespace Campus.Models
         [MinLength(2,ErrorMessage ="用户名长度不能少于2个字符")]
         [MaxLength(20,ErrorMessage ="用户名长度不能大于20个字符！")]
         public string UserName { get; set; }
+
         [Required(ErrorMessage ="密码不能为空!")]
         [MinLength(8,ErrorMessage ="密码长度不能小于8个字符！")]
         [MaxLength(20,ErrorMessage ="密码长度不能大于20个字符！")]

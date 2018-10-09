@@ -48,7 +48,7 @@
                 </ul>
             </div>
         </div>
-        @if (User.Identity.Name != null)
+        @if (User.Identity.IsAuthenticated)
         {
             <div class="showArea">
                 <span id="username">@User.Identity.Name</span> <a href="/User/SignOut">登出</a>

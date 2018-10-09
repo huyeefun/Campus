@@ -12,6 +12,7 @@ namespace Campus.Models
         [MinLength(1, ErrorMessage = "标题长度不能少于1个字符")]
         [MaxLength(100, ErrorMessage = "标题长度不能大于100个字符！")]
         public string Title { get; set; }
+
         [Required(ErrorMessage = "内容不能为空！")]
         [MinLength(1, ErrorMessage = "内容长度不能少于1个字符")]
         public string Content { get; set; }

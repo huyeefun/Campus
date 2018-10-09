@@ -1,24 +1,27 @@
 ﻿@model Campus.Domain.Homework
 @{
-    ViewData["Title"] = "ShowDetailForTeahcher";
+    ViewData["Title"] = "作业详情";
 }
 
 <h2>这里是老师的界面</h2>
 <div id="displayDiv">
     <h3 id="displayTitle">@Model.Title</h3>
     <div id="displayContent">@Html.Raw(Model.Content)</div>
-    <a href="/Homework/Update?homeworkId=@Model.Id"  class="update">更改</a>&nbsp;
-    <a href="/Homework/Delete?homeworkId=@Model.Id">删除</a>&nbsp;
+    @if(User.Claims.FirstOrDefault(x => x.Type == "UserId").Value==Model.AuthorId.ToString())
+    {
+       <a href="/Homework/Update?homeworkId=@Model.Id" class="update">更改</a> 
+       <a href="/Homework/Delete?homeworkId=@Model.Id">删除</a>
+    }
 </div>
 <hr />
 @{
     foreach (var answer in Model.Answers)
     {
-        if(answer.Deleted==false)
-        { 
-        <div>@Html.Raw(answer.Content)</div>
-        <div>创建人：@answer.User.UserName  &nbsp;发布时间:@answer.ReleaseTime</div>
-        <hr />
+        if (answer.Deleted == false)
+        {
+            <div>@Html.Raw(answer.Content)</div>
+            <div>创建人：@answer.User.UserName  &nbsp;发布时间:@answer.ReleaseTime</div>
+            <hr />
         }
     }
 }
